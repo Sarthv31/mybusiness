@@ -235,6 +235,7 @@
     cursor: default;
   }
   .work-item:first-child { border-top: none; }
+  a.work-item { text-decoration: none; cursor: pointer; }
 
   .work-item .swatch {
     aspect-ratio: 4 / 3;
@@ -251,6 +252,7 @@
   }
 
   .swatch svg { width: 100%; height: 100%; display: block; }
+  .swatch iframe { width: 100%; height: 100%; border: none; display: block; pointer-events: none; }
 
   .work-item .info .label { margin-bottom: 0.6rem; }
 
@@ -299,101 +301,6 @@
   @media (max-width: 780px) {
     .work-item { grid-template-columns: 1fr; gap: 1.5rem; }
   }
-
-  /* ---------- Packages ---------- */
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .pricing-card {
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 2.25rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), border-color 0.35s, box-shadow 0.35s;
-  }
-  .pricing-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--ink-soft);
-    box-shadow: 0 24px 48px rgba(255,255,255,0.04);
-  }
-  .pricing-card.featured { border-color: var(--ink); background: var(--accent-soft); }
-  .pricing-badge {
-    position: absolute;
-    top: -12px;
-    left: 1.75rem;
-    background: var(--ink);
-    color: var(--paper);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.7rem;
-    border-radius: 100px;
-  }
-  .pricing-name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 0.75rem;
-  }
-  .pricing-price {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 2.4rem;
-    margin-bottom: 0.75rem;
-  }
-  .pricing-desc {
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-    margin-bottom: 1.75rem;
-    min-height: 2.6em;
-  }
-  .pricing-benefits {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-    flex-grow: 1;
-  }
-  .pricing-benefits li {
-    font-size: 0.88rem;
-    padding-left: 1.4rem;
-    position: relative;
-    color: var(--ink);
-  }
-  .pricing-benefits li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--ink-soft);
-    font-family: 'IBM Plex Mono', monospace;
-  }
-  .pricing-cta {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    padding: 0.75rem;
-    border-radius: 3px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: background 0.25s, color 0.25s, transform 0.25s;
-  }
-  .pricing-cta:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
-  .pricing-card.featured .pricing-cta { background: var(--ink); color: var(--paper); }
-  .pricing-card.featured .pricing-cta:hover { background: var(--accent); }
-
-  @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
 
   /* ---------- About ---------- */
   .about {
@@ -516,7 +423,6 @@
   <a class="mark" href="#">VEYRO</a>
   <ul>
     <li><a href="#work">Work<span class="nav-tip">Portfolio & project examples</span></a></li>
-    <li><a href="#packages">Packages<span class="nav-tip">Pricing & what's included</span></a></li>
     <li><a href="#about">About<span class="nav-tip">Background, tools & availability</span></a></li>
     <li><a href="#contact">Contact<span class="nav-tip">Get in touch about a project</span></a></li>
   </ul>
@@ -557,6 +463,28 @@
         <div class="tags"><span>HTML / CSS / JS</span><span>Responsive</span><span>Custom animation</span></div>
       </div>
     </div>
+    <a class="work-item" href="https://sarthv31.github.io/Veyro-car-detailing/" target="_blank" rel="noopener noreferrer">
+      <div class="swatch">
+        <iframe src="https://sarthv31.github.io/Veyro-car-detailing/" title="Live preview of the Premium Car Detailing concept site" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+      <div class="info">
+        <div class="label">Concept project — 2026</div>
+        <h3>Premium Car Detailing</h3>
+        <p>A concept site for a premium car detailing service — animated stat counters, a full services menu with pricing, and a booking form tied to specific service packages.</p>
+        <div class="tags"><span>Booking form</span><span>Service menu</span><span>Animated stats</span></div>
+      </div>
+    </a>
+    <a class="work-item" href="https://sarthv31.github.io/Veyro-car-cafe/" target="_blank" rel="noopener noreferrer">
+      <div class="swatch">
+        <iframe src="https://sarthv31.github.io/Veyro-car-cafe/" title="Live preview of the Car Culture Cafe concept site" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+      <div class="info">
+        <div class="label">Concept project — 2026</div>
+        <h3>Car Culture Cafe</h3>
+        <p>A car-culture coffee shop concept with a filterable menu (coffee / food / signature items), a reservation form with date picker, and a light/dark theme toggle.</p>
+        <div class="tags"><span>Dark mode toggle</span><span>Filterable menu</span><span>Reservation form</span></div>
+      </div>
+    </a>
     <div class="work-item">
       <div class="swatch">
         <svg viewBox="0 0 400 300" preserveAspectRatio="none">
@@ -571,57 +499,8 @@
         <h3>Your Project, Next</h3>
         <p>Currently taking on new work — this space is reserved for what we build together.</p>
         <div class="tags"><span>Available now</span></div>
-        <a class="mini-cta" href="#packages">See packages →</a>
+        <a class="mini-cta" href="#contact">Get in touch →</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="packages">
-  <div class="section-head">
-    <h2>Packages</h2>
-    <p>Pick a starting point — every project can be scoped further once we talk.</p>
-  </div>
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <div class="pricing-name">Basic</div>
-      <div class="pricing-price">₹4,999</div>
-      <div class="pricing-desc">A focused single-page site to get you online fast.</div>
-      <ul class="pricing-benefits">
-        <li>1-page responsive website</li>
-        <li>Mobile-friendly design</li>
-        <li>Contact form</li>
-        <li>3-day delivery</li>
-        <li>1 round of revisions</li>
-      </ul>
-      <a class="pricing-cta" href="payment.html?package=basic">Get started</a>
-    </div>
-    <div class="pricing-card featured">
-      <div class="pricing-badge">Most popular</div>
-      <div class="pricing-name">Premium</div>
-      <div class="pricing-price">₹12,999</div>
-      <div class="pricing-desc">A complete multi-page site with custom motion.</div>
-      <ul class="pricing-benefits">
-        <li>Up to 5 pages</li>
-        <li>Custom design & animation</li>
-        <li>Contact form + email integration</li>
-        <li>7-day delivery</li>
-        <li>2 rounds of revisions</li>
-      </ul>
-      <a class="pricing-cta" href="payment.html?package=premium">Get started</a>
-    </div>
-    <div class="pricing-card">
-      <div class="pricing-name">Plus</div>
-      <div class="pricing-price">₹24,999</div>
-      <div class="pricing-desc">Full custom build with ongoing support after launch.</div>
-      <ul class="pricing-benefits">
-        <li>Unlimited pages</li>
-        <li>Fully custom interactions</li>
-        <li>SEO-friendly structure</li>
-        <li>Deployment & domain setup help</li>
-        <li>30 days of post-launch support</li>
-      </ul>
-      <a class="pricing-cta" href="payment.html?package=plus">Get started</a>
     </div>
   </div>
 </section>
@@ -640,7 +519,7 @@
       <div class="fact"><div class="label">Focus</div><div>Websites & landing pages</div></div>
       <div class="fact"><div class="label">Tools</div><div>HTML, CSS, JavaScript, GitHub</div></div>
       <div class="fact"><div class="label">Availability</div><div>Open for new projects</div></div>
-      <div class="fact"><div class="label">Turnaround</div><div>Basic in ~3 days, Premium/Plus scoped per project</div></div>
+      <div class="fact"><div class="label">Turnaround</div><div>Scoped per project, once we've talked details</div></div>
     </div>
   </div>
 </section>
