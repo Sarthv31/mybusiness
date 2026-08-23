@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEYRO — Web Developer</title>
+<link rel="icon" type="image/svg+xml" href="veyro-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #0a0a0a;
+    --ink: #f2f2ef;
+    --ink-soft: #8f8f8a;
+    --line: #2a2a28;
+    --accent: #ffffff;
+    --accent-soft: #171716;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Nav ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.75rem 6vw;
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.86);
+    backdrop-filter: blur(6px);
+    z-index: 20;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--line); }
+
+  nav .mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    text-decoration: none;
+  }
+  nav .mark img { height: 32px; width: auto; display: block; }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.25rem;
+  }
+
+  nav a {
+    position: relative;
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    transition: color 0.25s;
+    padding-bottom: 2px;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  nav a:hover, nav a:focus-visible { color: var(--ink); }
+  nav a:hover::after, nav a:focus-visible::after { transform: scaleX(1); }
+
+  .nav-tip {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translate(-50%, -6px);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    padding: 0.5rem 0.85rem;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .nav-tip::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid var(--ink);
+  }
+  nav a:hover .nav-tip, nav a:focus-visible .nav-tip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 6vw 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero .label { margin-bottom: 1.75rem; animation: fadeInUp 0.7s ease both; }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.6rem, 7vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+    animation: fadeInUp 0.7s ease 0.08s both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .hero .sub {
+    margin-top: 2rem;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    animation: fadeInUp 0.7s ease 0.16s both;
+  }
+
+  .hero .meta-row {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3.5rem;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.7s ease 0.24s both;
+  }
+
+  .hero .meta-row div { font-size: 0.85rem; }
+  .hero .meta-row .label { display: block; margin-bottom: 0.3rem; }
+
+  .hero-index {
+    position: absolute;
+    right: 6vw;
+    bottom: 4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .hero-index .bar { width: 40px; height: 1px; background: var(--line); position: relative; overflow: hidden; }
+  .hero-index .bar::after {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 38%;
+    background: var(--accent);
+  }
+
+  @media (max-width: 640px) { .hero-index { display: none; } }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 6rem 6vw; border-top: 1px solid var(--line); }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3.5rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  }
+
+  .section-head p { max-width: 34ch; color: var(--ink-soft); font-size: 0.92rem; }
+
+  /* ---------- Work ---------- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 3rem;
+    padding: 2.75rem 0;
+    border-top: 1px solid var(--line);
+    align-items: center;
+    cursor: default;
+  }
+  .work-item:first-child { border-top: none; }
+  a.work-item { text-decoration: none; cursor: pointer; }
+
+  .work-item .swatch {
+    aspect-ratio: 4 / 3;
+    border-radius: 2px;
+    background: var(--accent-soft);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease;
+  }
+  .work-item:hover .swatch {
+    transform: translateY(-6px);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.16), 0 24px 48px rgba(255,255,255,0.04);
+  }
+
+  .swatch svg { width: 100%; height: 100%; display: block; }
+  .swatch iframe { width: 100%; height: 100%; border: none; display: block; pointer-events: none; }
+
+  .work-item .info .label { margin-bottom: 0.6rem; }
+
+  .work-item .info h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.7rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .work-item .info p { color: var(--ink-soft); max-width: 42ch; font-size: 0.95rem; }
+
+  .work-item .tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .work-item .tags span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--ink-soft);
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .work-item:hover .tags span { border-color: var(--ink-soft); color: var(--ink); }
+
+  .mini-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.15rem;
+    width: fit-content;
+    transition: border-color 0.25s, gap 0.25s;
+  }
+  .mini-cta:hover { border-color: var(--ink); gap: 0.65rem; }
+
+  @media (max-width: 780px) {
+    .work-item { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
+  /* ---------- About ---------- */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about p { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.25rem; max-width: 52ch; }
+  .about p:first-child { font-family: 'Fraunces', serif; font-size: 1.4rem; color: var(--ink); font-style: italic; font-weight: 400; }
+
+  .about-facts { display: flex; flex-direction: column; gap: 1.75rem; }
+  .about-facts .fact .label { margin-bottom: 0.35rem; }
+  .about-facts .fact div:last-child { font-size: 0.95rem; }
+
+  @media (max-width: 780px) { .about { grid-template-columns: 1fr; } }
+
+  /* ---------- Contact ---------- */
+  .contact { border-top: 1px solid var(--line); }
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+  .contact h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1.08;
+    max-width: 14ch;
+  }
+  .contact .sub { color: var(--ink-soft); margin-top: 1.25rem; max-width: 38ch; }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 2.25rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 0.2rem;
+    width: fit-content;
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+  .contact-link .arrow { display: inline-block; transition: transform 0.25s ease; }
+  .contact-link:hover .arrow { transform: translateX(5px); }
+
+  form { display: flex; flex-direction: column; gap: 1.4rem; }
+  .field { display: flex; flex-direction: column; gap: 0.5rem; }
+  .field label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  .field input, .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 0.6rem 0.1rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.98rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  button[type="submit"] {
+    margin-top: 0.75rem;
+    align-self: flex-start;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0.85rem 1.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  button[type="submit"]:hover { background: var(--accent); transform: translateY(-2px); }
+  button[type="submit"]:focus-visible, .contact-link:focus-visible, nav a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .form-note { font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.5rem; line-height: 1.6; }
+
+  @media (max-width: 780px) { .contact-wrap { grid-template-columns: 1fr; } }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 2.5rem 6vw;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media (max-width: 640px) {
+    .nav-tip { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="mark" href="#"><img src="veyro-logo.svg" alt="VEYRO"></a>
+  <ul>
+    <li><a href="#work">Work<span class="nav-tip">Portfolio & project examples</span></a></li>
+    <li><a href="#about">About<span class="nav-tip">Background, tools & availability</span></a></li>
+    <li><a href="#contact">Contact<span class="nav-tip">Get in touch about a project</span></a></li>
+  </ul>
+</nav>
+
+<section class="hero" style="border-top:none; padding-top: 4rem;">
+  <div class="label">Freelance web development</div>
+  <h1>Modern websites,<br>built <em>right.</em></h1>
+  <p class="sub">I'm Sarthak — I design and build fast, responsive websites for small businesses, personal brands, and anyone who wants something better than a generic template.</p>
+  <div class="meta-row">
+    <div><span class="label">Based in</span>Remote — available worldwide</div>
+    <div><span class="label">Currently</span>Open for new projects</div>
+    <div><span class="label">Focus</span>Web Development · Design · Deployment</div>
+  </div>
+  <div class="hero-index"><span>01 / 04</span><span class="bar"></span><span>VEYRO</span></div>
+</section>
+
+<section id="work">
+  <div class="section-head">
+    <h2>Selected work</h2>
+    <p>What I've built so far — this list grows with every project.</p>
+  </div>
+  <div class="work-grid">
+    <div class="work-item">
+      <div class="swatch">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="none">
+          <rect width="400" height="300" fill="#171716"/>
+          <rect x="60" y="60" width="280" height="26" fill="none" stroke="#f2f2ef" stroke-width="1.5"/>
+          <rect x="60" y="110" width="130" height="130" fill="none" stroke="#f2f2ef" stroke-width="1.5"/>
+          <rect x="210" y="110" width="130" height="60" fill="none" stroke="#f2f2ef" stroke-width="1.5"/>
+          <rect x="210" y="180" width="130" height="60" fill="none" stroke="#f2f2ef" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="info">
+        <div class="label">Portfolio site — 2026</div>
+        <h3>This Very Website</h3>
+        <p>Designed and built end-to-end — dark theme, custom hover states, smooth scroll, and a working contact flow. You're looking at the proof.</p>
+        <div class="tags"><span>HTML / CSS / JS</span><span>Responsive</span><span>Custom animation</span></div>
+      </div>
+    </div>
+    <a class="work-item" href="https://sarthv31.github.io/Veyro-car-detailing/" target="_blank" rel="noopener noreferrer">
+      <div class="swatch">
+        <iframe src="https://sarthv31.github.io/Veyro-car-detailing/" title="Live preview of the Premium Car Detailing concept site" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+      <div class="info">
+        <div class="label">Concept project — 2026</div>
+        <h3>Premium Car Detailing</h3>
+        <p>A concept site for a premium car detailing service — animated stat counters, a full services menu with pricing, and a booking form tied to specific service packages.</p>
+        <div class="tags"><span>Booking form</span><span>Service menu</span><span>Animated stats</span></div>
+      </div>
+    </a>
+    <a class="work-item" href="https://sarthv31.github.io/Veyro-car-cafe/" target="_blank" rel="noopener noreferrer">
+      <div class="swatch">
+        <iframe src="https://sarthv31.github.io/Veyro-car-cafe/" title="Live preview of the Car Culture Cafe concept site" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+      <div class="info">
+        <div class="label">Concept project — 2026</div>
+        <h3>Car Culture Cafe</h3>
+        <p>A car-culture coffee shop concept with a filterable menu (coffee / food / signature items), a reservation form with date picker, and a light/dark theme toggle.</p>
+        <div class="tags"><span>Dark mode toggle</span><span>Filterable menu</span><span>Reservation form</span></div>
+      </div>
+    </a>
+    <div class="work-item">
+      <div class="swatch">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="none">
+          <rect width="400" height="300" fill="#171716"/>
+          <rect x="40" y="40" width="320" height="220" fill="none" stroke="#8f8f8a" stroke-width="1.5" stroke-dasharray="6 6"/>
+          <line x1="165" y1="150" x2="235" y2="150" stroke="#f2f2ef" stroke-width="1.5"/>
+          <line x1="200" y1="115" x2="200" y2="185" stroke="#f2f2ef" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="info">
+        <div class="label">Open slot</div>
+        <h3>Your Project, Next</h3>
+        <p>Currently taking on new work — this space is reserved for what we build together.</p>
+        <div class="tags"><span>Available now</span></div>
+        <a class="mini-cta" href="#contact">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <h2>About</h2>
+  </div>
+  <div class="about">
+    <div>
+      <p>I think a good website should feel fast, load cleanly, and get out of the way.</p>
+      <p>I'm a web developer focused on building clean, modern, responsive sites — from single-page landing pages to fuller multi-page builds with custom animation and interaction design.</p>
+      <p>Every project starts with understanding what the site actually needs to do — then building it to be genuinely fast and easy to update, not just good-looking in a screenshot.</p>
+    </div>
+    <div class="about-facts">
+      <div class="fact"><div class="label">Focus</div><div>Websites & landing pages</div></div>
+      <div class="fact"><div class="label">Tools</div><div>HTML, CSS, JavaScript, GitHub</div></div>
+      <div class="fact"><div class="label">Availability</div><div>Open for new projects</div></div>
+      <div class="fact"><div class="label">Turnaround</div><div>Scoped per project, once we've talked details</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="contact-wrap">
+    <div>
+      <h2>Have a project in mind?</h2>
+      <p class="sub">Tell me a bit about it — timeline, budget range, and what you're trying to solve. I reply within two business days.</p>
+      <a class="contact-link" href="mailto:workwithveyro@gmail.com">workwithveyro@gmail.com <span class="arrow">→</span></a>
+    </div>
+    <form id="contactForm">
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" required>
+      </div>
+      <div class="field">
+        <label for="message">Project details</label>
+        <textarea id="message" required></textarea>
+      </div>
+      <button type="submit">Send inquiry</button>
+      <div class="form-note">This opens your email app with your message pre-filled, addressed to workwithveyro@gmail.com.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 VEYRO</div>
+  <div>workwithveyro@gmail.com</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const subject = encodeURIComponent('New message from your site');
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.location.href = `mailto:workwithveyro@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>
+
+</body>
+</html>

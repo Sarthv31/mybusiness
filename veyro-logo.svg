@@ -1,0 +1,9 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="200" fill="#0a0a0a"/>
+  <g stroke="#f2f2ef" stroke-width="3" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M55 55 L85 135"/>
+    <path d="M95 135 L125 55"/>
+    <line x1="70" y1="95" x2="110" y2="95"/>
+  </g>
+  <text x="175" y="122" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="62" letter-spacing="5" fill="#f2f2ef">VEYRO</text>
+</svg>
