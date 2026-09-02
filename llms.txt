@@ -1,0 +1,16 @@
+# VEYRO
+
+> VEYRO is a freelance web development studio run by Sarthak, building clean, custom, responsive websites for small businesses and independent professionals. Sites are hand-built with HTML, CSS, and JavaScript rather than page builders or templates, with an emphasis on fast load times and considered interaction design.
+
+## Pages
+
+- [Home](https://your-veyro-site.com/): Portfolio, services overview, about, and contact.
+- [Get Started](https://your-veyro-site.com/payment.html): Project inquiry and booking form.
+
+## Services
+
+Custom website design and development, landing pages, and responsive front-end builds for small businesses and individuals.
+
+## Contact
+
+workwithveyro@gmail.com

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Started — VEYRO</title>
+<meta name="description" content="Start a project with VEYRO — pick a package and send over your project details.">
+<link rel="canonical" href="https://your-veyro-site.com/payment.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Get Started — VEYRO">
+<meta property="og:description" content="Start a project with VEYRO — pick a package and send over your project details.">
+<meta property="og:url" content="https://your-veyro-site.com/payment.html">
+<meta property="og:image" content="https://your-veyro-site.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Get Started — VEYRO">
+<meta name="twitter:image" content="https://your-veyro-site.com/og-image.png">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="veyro-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #0a0a0a;
+    --ink: #f2f2ef;
+    --ink-soft: #8f8f8a;
+    --line: #2a2a28;
+    --accent: #ffffff;
+    --accent-soft: #171716;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  a { color: inherit; }
+  .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.75rem 6vw;
+    border-bottom: 1px solid var(--line);
+  }
+  header .mark { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.15rem; text-decoration: none; }
+  header .mark img { height: 32px; width: auto; display: block; }
+  .back-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+    transition: color 0.25s;
+  }
+  .back-link:hover { color: var(--ink); }
+
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 4.5rem 6vw 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+  .intro { color: var(--ink-soft); max-width: 40ch; margin-bottom: 2.5rem; font-size: 0.95rem; }
+
+  .package-switch { display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .package-switch button {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.1rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+  }
+  .package-switch button:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .package-switch button.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .summary-card {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 2rem;
+    background: var(--accent-soft);
+    transition: opacity 0.2s ease;
+  }
+  .summary-card .pname {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+  .summary-card .pprice {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 2.6rem;
+    margin-bottom: 1.25rem;
+  }
+  .summary-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .summary-card li { font-size: 0.88rem; padding-left: 1.3rem; position: relative; }
+  .summary-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--ink-soft);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  form { display: flex; flex-direction: column; gap: 1.4rem; }
+  .field { display: flex; flex-direction: column; gap: 0.5rem; }
+  .field label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  .field input, .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 0.6rem 0.1rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.98rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  button[type="submit"] {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0.85rem 1.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  button[type="submit"]:hover { background: var(--accent); transform: translateY(-2px); }
+  button[type="submit"]:focus-visible, .back-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .form-note { font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.75rem; line-height: 1.6; }
+
+  footer {
+    padding: 2.5rem 6vw;
+    border-top: 1px solid var(--line);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 780px) { main { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="mark" href="index.html"><img src="veyro-logo.svg" alt="VEYRO"></a>
+  <a class="back-link" href="index.html">← Back to site</a>
+</header>
+
+<main>
+  <div>
+    <div class="label">Get started</div>
+    <h1>Let's build something.</h1>
+    <p class="intro">Pick a package, add a few details about your project, and I'll follow up within 24 hours with a proposal and a payment link.</p>
+
+    <div class="package-switch" id="packageSwitch">
+      <button data-package="basic">Basic — ₹4,999</button>
+      <button data-package="premium">Premium — ₹12,999</button>
+      <button data-package="plus">Plus — ₹24,999</button>
+    </div>
+
+    <div class="summary-card" id="summaryCard">
+      <div class="pname" id="sumName">Premium</div>
+      <div class="pprice" id="sumPrice">₹12,999</div>
+      <ul id="sumBenefits"></ul>
+    </div>
+  </div>
+
+  <div>
+    <form id="bookingForm">
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" required>
+      </div>
+      <div class="field">
+        <label for="details">Tell me about the project</label>
+        <textarea id="details" required placeholder="What's the site for, and any must-haves?"></textarea>
+      </div>
+      <button type="submit">Send request</button>
+      <div class="form-note">This opens your email app with the details filled in, addressed to workwithveyro@gmail.com. I'll reply with a proposal and a payment link — nothing is charged automatically.</div>
+    </form>
+  </div>
+</main>
+
+<footer>
+  © 2026 VEYRO · workwithveyro@gmail.com
+</footer>
+
+<script>
+  const packages = {
+    basic: { name: 'Basic', price: '₹4,999', benefits: ['1-page responsive website', 'Mobile-friendly design', 'Contact form', '3-day delivery', '1 round of revisions'] },
+    premium: { name: 'Premium', price: '₹12,999', benefits: ['Up to 5 pages', 'Custom design & animation', 'Contact form + email integration', '7-day delivery', '2 rounds of revisions'] },
+    plus: { name: 'Plus', price: '₹24,999', benefits: ['Unlimited pages', 'Fully custom interactions', 'SEO-friendly structure', 'Deployment & domain setup help', '30 days of post-launch support'] }
+  };
+
+  const switchEl = document.getElementById('packageSwitch');
+  const card = document.getElementById('summaryCard');
+  const sumName = document.getElementById('sumName');
+  const sumPrice = document.getElementById('sumPrice');
+  const sumBenefits = document.getElementById('sumBenefits');
+  const buttons = switchEl.querySelectorAll('button');
+
+  function selectPackage(key) {
+    const pkg = packages[key] || packages.premium;
+    card.style.opacity = '0';
+    setTimeout(() => {
+      sumName.textContent = pkg.name;
+      sumPrice.textContent = pkg.price;
+      sumBenefits.innerHTML = pkg.benefits.map(b => `<li>${b}</li>`).join('');
+      card.style.opacity = '1';
+    }, 150);
+    buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.package === key));
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => selectPackage(btn.dataset.package));
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const initial = params.get('package');
+  selectPackage(packages[initial] ? initial : 'premium');
+
+  document.getElementById('bookingForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const details = document.getElementById('details').value;
+    const pkgName = sumName.textContent;
+    const subject = encodeURIComponent(`New project inquiry — ${pkgName} package`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPackage: ${pkgName}\n\nProject details:\n${details}`);
+    window.location.href = `mailto:workwithveyro@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>
+
+</body>
+</html>
